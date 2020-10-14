@@ -1,64 +1,76 @@
 class UsersController < ApplicationController
 
-  # def movie_params
-  #   params.require(:movie).permit(:title, :rating, :description, :release_date)
-  # end
-
   def show
-    id = params[:id] # retrieve movie ID from URI route
-    @user = User.find(id) # look up movie by unique ID
+    #id = params[:id] # retrieve movie ID from URI route
+    #@movie = Movie.find(id) # look up movie by unique ID
     # will render app/views/movies/show.<extension> by default
   end
 
   def new
-    # create user
-    @user = User.new
-
+    # create user instance
     # Note: should check the security code
+    @user = User.new
   end
 
   def signin_show
     # signin homepage
-    @users = User.all
+    #@movies = Movie.all
   end
 
   def signin
     # sign in
-    @user = User.create!(movie_params)
-    flash[:notice] = "#{@user.title} was successfully created."
-    redirect_to movies_path
+    @user = User.find_by(username: params[:username], password: params[:password])
+    
+    if @user
+      session[:user_name] = @user.username
+      flash[:notice] = ' user#{@user.username} logins in successfully!'
+      # also did not redirect to the different page according to the user type
+      redirect_to root1_path # haven't created yet
+    else
+      flash[:notice] = ' the username or password is not correct'
+      redirect_to signin_users_path
+    end
   end
 
   def signup_show
     # signup homepage
-    @movies = User.all
+    @movies = Movie.all
+    
   end
 
   def signup
     # sign up
-    @user = User.create!(movie_params)
-    flash[:notice] = "#{@user.title} was successfully created."
-    redirect_to movies_path
+    if params[:magicCode] == "rikka"
+      params[:type] = 1
+    else
+      params[:type] = 0
+    end
+    
+    @user = User.create!(user_params)
+    flash[:notice] = "#{@user.username} was successfully created."
+    redirect_to signin_users_path
   end
 
   def forgot_show
     # forgot password homepage
-    @users = User.all
+    @movies = Movie.all
   end
 
   def forgot
     # forgot password
-    @user = User.create!(movie_params)
-    flash[:notice] = "#{@user.title} was successfully created."
-    redirect_to movies_path
+    @user = User.find params[:username]
+    @user.update_attributes!(user_params[:password])
+    flash[:notice] = "#{@user.username} was successfully updated."
+    redirect_to signin_users_path
   end
 
   def send_code
     # send verfication code to the email
   end
   
-  def edit
-    @user = User.find(params[:id])
-  end  
-
+  private 
+  def user_params
+     params.require(:user).permit(:email, :username, :password, :type, :lastname, :firstname, :phone)
+  end
+  
 end
