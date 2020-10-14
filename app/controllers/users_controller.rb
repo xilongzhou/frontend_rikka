@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def signin_show
     # signin homepage
-    #@movies = Movie.all
+    @users = User.all
   end
 
   def signin
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
   def signup_show
     # signup homepage
-    @movies = Movie.all
+    @users = User.all
     
   end
 

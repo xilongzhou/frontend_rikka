@@ -1,50 +1,33 @@
 <h1>Welcome to RIKKA BEAUTY</h1>
-<h2>Log In</h2>
+<h2>Please Log In Here</h2>
 
-<%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
+<%= form_for :user, url: signin_users_path do |f| %>
   <p>
     <%= f.label :Username %><br>
     <%= f.text_field :username %>
   </p>
   <p>
     <%= f.label :Password %><br>
-    <%= f.text_field :password %>
+    <%= f.password_field :password %>
   </p>
-  <%= link_to '<button type="button">Log In</button>'.html_safe, "Users#show" %>
-
-<h1>RIKKA, Hello!!!!</h1>
-
-<!--<%= form_for :user do |f| %>-->
-<!--  <p>-->
-<!--    <%= f.label :Username %><br>-->
-<!--    <%= f.text_field :username %>-->
-<!--  </p>-->
- 
-<!--  <p>-->
-<!--    <%= f.label :Password %><br>-->
-<!--    <%= f.text_area :password %>-->
-<!--  </p>-->
-<!--  <%= link_to '<button type="button">New Post</button>'.html_safe, signup_users_path %>-->
+  <p>
+    <%= f.submit "Log In"%>
+  </p>
   
-<!--<% end %>-->
-
-
-<%= form_for :user do |f| %>
-<fieldset>
-  <legend>Please Log In</legend>
+  <!--<% @users.each do |user| %>-->
+  <!--  <tr>-->
+  <!--    <p> Name </p>-->
+  <!--    <td><%= user.username %></td>-->
+  <!--    <p> Password </p>-->
+  <!--    <td><%= user.password %></td>-->
+  <!--  </tr>-->
+  <!--<% end %>  -->
   
-    <div class="left"><%= label_tag :name, 'Name:' %></div>
-    <div class="right"><%= text_field_tag :name, params[:name] %></div>
-
-    <div class="left"><%= label_tag :password, 'Password:' %></div>
-    <div class="right"><%= password_field_tag :password, params[:password] %></div>
-
-    <div class="right"><div class="button"><%= submit_tag "Login" %></div></div>
-
-</fieldset>
+  
+  
+  <!--<%= link_to '<button type="button">Log In</button>'.html_safe, "Users#show" %>-->
 
 <% end %>
-
 
 
 <%= link_to 'SignUp', signup_users_path %>

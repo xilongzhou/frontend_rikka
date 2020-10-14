@@ -1,7 +1,7 @@
 <h1>Welcome to RIKKA BEAUTY</h1>
 <h2>Sign Up</h2>
 
-<%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
+<%= form_for:user, url: signup_users_path do |f| %>
   <p>
     <%= f.label :First_Name %><br>
     <%= f.text_field :firstname %>
@@ -34,24 +34,13 @@
     <%= f.label :Admin_Verification %><br>
     <%= f.text_field :magicCode %>
   </p>
-  <%= link_to '<button type="button">Sign Up</button>'.html_safe, signin_users_path %>
-<% end %>
-
-
-<%= form_for :user do |f| %>
-<fieldset>
-  <legend>Please Log In</legend>
+  <p>
+    <%= f.submit "Sign Up"%>
+  </p>
+  <!--<%= link_to '<button type="button">Sign Up</button>'.html_safe, signin_users_path %>-->
   
-    <div class="left"><%= label_tag :name, 'Name:' %></div>
-    <div class="right"><%= text_field_tag :name, params[:name] %></div>
-
-    <div class="left"><%= label_tag :password, 'Password:' %></div>
-    <div class="right"><%= password_field_tag :password, params[:password] %></div>
-
-    <div class="right"><div class="button"><%= submit_tag "Login" %></div></div>
-
-</fieldset>
 <% end %>
+
 
 
 <%= link_to 'Back', signin_users_path %>
